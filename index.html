@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+  	<title>listssss</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        * {
+            color: #1A0423;
+        }
+
+        .complete {
+            background-color: #fff7c9;
+        }
+
+        .container {
+            width: 60%;
+        }
+
+        .entry-text, .old-entry-display {
+            font-size: 1.5em;
+            padding: 5px;
+            background-color: #F9ECFE;
+            color: #581F6E;
+            border: 2px solid #581F6E;
+            border-radius: 3px;
+            width: 100%;
+            border: 1px solid #;
+            margin: 0.5em auto;
+            min-height: 25em;
+        }
+
+
+        body {
+            background-color: #fff9d9;
+        }
+
+    </style>
+  </head>
+
+  <body>
+
+	<div class="container">
+
+	  <div class="row">
+      <div class="find-row"></div>
+          <h2>Find a list!</h2>
+	    <input type="text" id="listname">
+          <button id="find">FIND</button>
+	  </div>
+
+        <div class="row">
+      <div class="results-row">Results:</div>
+	  </div>
+
+	</div>
+
+    <script>
+	$(function(){
+
+<!--        const url = "http://localhost:5000/" + $("#listname").val();;-->
+<!--        fetch(url)-->
+<!--        .then(data=>{console.log(data.json())});-->
+
+
+
+    $('#find').on('click', function(event) {
+        var listName = $("#listname").val();
+
+        const httpRequest = new XMLHttpRequest();
+        const url = "http://localhost:5000/get/" + listName;
+
+        httpRequest.open("GET", url);
+        httpRequest.withCredentials = false;
+
+        httpRequest.send();
+        httpRequest.onreadystatechange=(e)=>{
+            response = httpRequest.responseText;
+            console.log(response);
+            $( ".results-row" ).text(response);
+        }
+
+    });
+	});
+
+
+    </script>
+
+   </body>
+</html>
